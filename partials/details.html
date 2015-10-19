@@ -1,0 +1,19 @@
+<section class="jobdetailspage">
+  <!-- SEARCH DIRECTORY -->
+  <a href="#/list" class="btn btn-left">BACK</a>
+  <a href="#/details/{{prevItem}}" class="btn btn-left">&lt;</a>
+  <a href="#/details/{{nextItem}}" class="btn btn-right">&gt;</a>
+  <div class="job cf" ng-model="jobsArray">
+    <h1>{{jobsArray[whichItem].client}}</h1>
+    <div class="info">
+      <p>{{jobsArray[whichItem].date}}</p>
+      <p>{{jobsArray[whichItem].ref}}</p>
+      <p>{{jobsArray[whichItem].number}}</p>
+      <p>{{jobsArray[whichItem].jobstart}}</p>
+      <p>{{jobsArray[whichItem].jobfinish}}</p>
+      <p>{{jobsArray[whichItem].active}}</p>
+
+    </div>
+  </div>
+
+</section>

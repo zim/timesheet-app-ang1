@@ -1,0 +1,46 @@
+
+<section class="jobdeditpage">
+  <!-- SEARCH DIRECTORY -->
+  <a href="#/list" class="btn btn-left">BACK</a>
+  <!-- <a href="#/details/{{prevItem}}" class="btn btn-left">&lt;</a>
+  <a href="#/details/{{nextItem}}" class="btn btn-right">&gt;</a> -->
+
+  <div class="job cf" ng-model="jobsArray">
+
+    <h1>{{jobsArray[whichItem].client}}</h1>
+    <div class="info">
+      <p>{{jobsArray[whichItem].date}}</p>
+      <p>{{jobsArray[whichItem].ref}}</p>
+      <p>{{jobsArray[whichItem].number}}</p>
+      <p>{{jobsArray[whichItem].jobstart}}</p>
+      <p>{{jobsArray[whichItem].jobfinish}}</p>
+      <p>{{jobsArray[whichItem].active}}</p>
+    </div>
+
+    <form novalidate class="simple-form">
+		<!-- Name: <input type="text" ng-model="user.name" /><br />
+		E-mail: <input type="email" ng-model="user.email" /><br />
+		Gender: <input type="radio" ng-model="user.gender" value="male" />male
+		<input type="radio" ng-model="user.gender" value="female" />female<br />
+		<input type="button" ng-click="reset()" value="Reset" />
+		<input type="submit" ng-click="update(user)" value="Save" /> -->
+
+
+		<div id="form_edit_item">
+			Date: <input type="DATE" name="myinputdate" id="textboxDateadd20" datepicker-popup="null" ng-model="job.date" /><br />
+			Client: <input type="TEXT" name="myinputclient" id="textboxClientadd20" ng-model="job.client" /><br />
+			Ref: <input type="TEXT" name="myinputref" id="textboxRefadd20" ng-model="job.ref" /><br />
+			Number: <input type="TEXT" name="myinputnumber" id="textboxNumberadd20" ng-model="job.number" /><br />
+			Start: <input type="TEXT" name="myinputst" id="textboxJobStartadd20" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobstart" /><br />
+			Finish: <input type="TEXT" name="myinputft" id="textboxJobFinishadd20" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobfinish" /><br />
+
+			<input type="submit" ng-click="update(job)" value="Save" />
+		</div>
+
+
+	</form>
+    
+  </div>
+
+</section>
+

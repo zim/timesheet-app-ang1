@@ -1,0 +1,44 @@
+
+<section class="jobslistpage">
+  <!-- SEARCH DIRECTORY -->
+  <div class="search">
+    <h1>Job Directory</h1>
+    <label>Search: </label>
+    <input ng-model="query" placeholder="Search for jobs" autofocus>
+
+    <label class="formgroup">by:
+      <select ng-model="jobsOrder">
+        <option value="date">Date</option>
+        <option value="client">Client</option>
+        <option value="number">Number</option>
+        <option value="active">Active</option>
+      </select>
+    </label>
+
+  </div>
+
+        <!--
+other filters:  | orderBy:'client', 
+-->
+<div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray | filter: query | orderBy: jobsOrder">
+
+  <div class="col-md-2 span-client">{{job.date}}<span class="span-start-time"><span>Start Time:</span> {{job.jobstart}}</span><span class="span-finish-time"><span>Finish Time:</span> {{job.jobfinish}}</span><span class="span-duration"><span>Duration:</span> {{job.duration}}</span></div>
+
+  <div class="col-md-3 span-client" data-index="{{$index}}" id="{{$index}}_tShowClient">{{job.client | uppercase}}<a href="#/details/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnShowClient" data-index="{{$index}}">[VIEW {{$index}}]</a></div>
+
+  <div class="col-md-3 span-number">{{job.number}}</div>
+
+  <div class="col-md-4-end span-ref">{{job.ref}}
+
+    <div class="iconWrapElement">
+      <button id="{{$index}}_btnSetState" data-index="{{$index}}" class="control-btn btn-active-off"></button>
+      <button id="{{$index}}_btnEditItem" data-index="{{$index}}" data-toggle="modal" data-target="#modal{{$index}}" class="control-btn btn-edit"></button>
+
+      <a href="#/edit/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnEditItem" data-index="{{$index}}" class="control-btn btn-edit">Edit</a>
+
+      <button id="{{$index}}_btnDeleteItem" data-index="{{$index}}" class="control-btn btn-delete"></button>
+    </div>
+  </div>
+</div>
+
+</section>
