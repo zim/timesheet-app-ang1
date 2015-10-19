@@ -23,7 +23,14 @@ myApp.factory('Data', function () {
 		} else {// IF LOCAL STORAGE SET THEN GET ALL DEBTOBJECTS FROM
 			console.log('LOCAL STORAGE SET');
 
-			return JSON.parse(localStorage.getItem('jobsObject'));
+			console.log(localStorage.getItem('jobsObject'));
+//angular.toJson($scope.user)
+			console.log(angular.fromJson(localStorage.getItem('jobsObject')));
+
+
+
+			//return JSON.parse(localStorage.getItem('jobsObject'));
+			return angular.fromJson(localStorage.getItem('jobsObject'));
 
 
 
@@ -48,6 +55,10 @@ myApp.config(['$routeProvider', function($routeProvider){
 	when('/edit/:itemId', {
 		templateUrl: 'partials/edit.html',
 		controller: 'EditItemController'
+	}).
+	when('/addjob', {
+		templateUrl: 'partials/addjob.html',
+		controller: 'AddJobController'
 	}).
 	otherwise({
 		redirectTo: '/list'
