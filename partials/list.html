@@ -1,7 +1,7 @@
 
-<section class="jobslistpage">
+<section class="jobslistpage row">
   <!-- SEARCH DIRECTORY -->
-  <div class="search">
+  <!-- <div class="search">
     <h1>Job Directory</h1>
     <label>Search: </label>
     <input ng-model="query" placeholder="Search for jobs" autofocus>
@@ -15,8 +15,7 @@
       </select>
     </label>
 
-    <a href="#/addjob">add job</a>
-  </div>
+  </div> -->
 
         <!--
 other filters:  | orderBy:'client', 
@@ -37,7 +36,7 @@ other filters:  | orderBy:'client',
 
       <a href="#/edit/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnEditItem" data-index="{{$index}}" class="control-btn btn-edit">Edit</a>
 
-      <button id="{{$index}}_btnDeleteItem" data-index="{{$index}}" class="control-btn btn-delete"></button>
+      <button id="{{$index}}_btnDeleteItem" data-index-number="{{$index}}" class="control-btn btn-delete" ng-click="delete()"></button>
     </div>
   </div>
 </div>

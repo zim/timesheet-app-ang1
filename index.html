@@ -38,6 +38,74 @@
 </head>
 <body>
 
+<!-- <div id="result"></div> -->
+  <div id="header" class="row row-logo">
+    <section class="layout">
+
+      <div class="col-md-12">
+
+        <a href="home" title="link one" class="title">TIMESHEET APP</a>
+        
+      </div>
+
+      <div class="col-md-6 info-panel">
+
+        <a href="#/info" title="" class="linksite-main" target="_blank">INFORMATION/INSTRUCTIONS</a>
+        
+      </div>
+
+    </section>
+  </div>
+
+
+  <div class="row row-add-item">
+
+    <section id="addFormWrapper" class="layout">
+
+
+      <div class="col-md-2"><a href="#/addjob">ADD</a></div>
+
+      <div class="search">
+
+        <div class="col-md-3">
+          <!-- <label>Search: </label> -->
+          <input ng-model="query" placeholder="Search for jobs" autofocus>
+        </div>
+
+        <div class="col-md-3">
+          <label class="formgroup">Order By:
+          <select ng-model="jobsOrder">
+            <option value="date">Date</option>
+            <option value="client">Client</option>
+            <option value="number">Number</option>
+            <option value="active">Active</option>
+          </select>
+        </label>
+        </div>
+        
+
+      </div>
+
+
+    </section>
+
+  </div>
+  <!-- end row -->
+
+  <div class="row row-add-item">
+
+    <section class="layout">
+
+      <div id="dateSelWrap" class="col-md-2"></div>
+
+      <div id="clientSelWrap" class="col-md-3"></div>
+
+      <div id="numberSelWrap" class="col-md-3"></div>
+
+    </section>
+
+  </div>
+  <!-- end row -->
 
   <div class="main" ng-view></div>
 

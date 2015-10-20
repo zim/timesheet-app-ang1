@@ -26,13 +26,15 @@
 		<input type="submit" ng-click="update(user)" value="Save" /> -->
 
 
+
+
 		<div id="form_edit_item">
-			Date: <input type="DATE" name="myinputdate" id="textboxDateadd20" datepicker-popup="null" ng-model="job.date" /><br />
+			Datssse: <input type="DATE" name="myinputdate" id="textboxDateadd20" datepicker-popup="null" ng-model="job.date" value="" /><br />
 			Client: <input type="TEXT" name="myinputclient" id="textboxClientadd20" ng-model="job.client" /><br />
 			Ref: <input type="TEXT" name="myinputref" id="textboxRefadd20" ng-model="job.ref" /><br />
 			Number: <input type="TEXT" name="myinputnumber" id="textboxNumberadd20" ng-model="job.number" /><br />
-			Start: <input type="TEXT" name="myinputst" id="textboxJobStartadd20" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobstart" /><br />
-			Finish: <input type="TEXT" name="myinputft" id="textboxJobFinishadd20" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobfinish" /><br />
+			Start: <input type="TEXT" name="myinputst" id="textboxJobStart" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobstart" /><br />
+			Finish: <input type="TEXT" name="myinputft" id="textboxJobFinish" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobfinish" /><br />
 
 			<input type="submit" ng-click="update(job)" value="Save" />
 		</div>
