@@ -64,6 +64,10 @@ myApp.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'partials/info.html',
 		controller: 'InfoController'
 	}).
+	when('/todo', {
+		templateUrl: 'partials/todo.html',
+		controller: 'TodoController'
+	}).
 	otherwise({
 		redirectTo: '/list'
 	});

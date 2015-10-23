@@ -1,9 +1,8 @@
-var jobControllers = angular.module('jobControllers', ['ngAnimate']);
+var jobControllers = angular.module('jobControllers', ['ui.bootstrap']);
 
 jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$filter', function ($scope, $http, Data, $filter) {
 
 	$scope.jobsArray = Data;
-
 
 	$scope.delete = function() {
 		console.log(this.job.$$hashKey);
@@ -98,6 +97,10 @@ jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$ro
 
 		  $scope.jobsArray[$scope.whichItem].date = $scope.master.date;
 		  $scope.jobsArray[$scope.whichItem].client = $scope.master.client;
+		  $scope.jobsArray[$scope.whichItem].ref = $scope.master.ref;
+		  $scope.jobsArray[$scope.whichItem].number = $scope.master.number;
+		  $scope.jobsArray[$scope.whichItem].jobstart = $scope.master.jobstart;
+		  $scope.jobsArray[$scope.whichItem].jobfinish = $scope.master.jobfinish;
 
 		  console.log($scope.jobsArray[$scope.whichItem].client);
 
@@ -176,6 +179,42 @@ jobControllers.controller('InfoController', ['$scope', 'Data', function ($scope,
 	$scope.jobsArray = Data;
 
 	console.log($scope.jobsArray);
+
+}]);
+// end myApp.controller('MyController', function MyController($scope) {
+
+jobControllers.controller('TodoController', ['$scope', 'Data', function ($scope, Data) {
+
+	$scope.jobsArray = Data;
+
+	console.log($scope.jobsArray);
+
+
+	// ACCORDIAN STUFF
+	$scope.oneAtATime = true;
+
+  $scope.groups = [
+    {
+      title: 'Dynamic Group Header - 1',
+      content: 'Dynamic Group Body - 1345252345'
+    },
+    {
+      title: 'Dynamic Group Header - 2344453',
+      content: 'Dynamic Group Body - 2'
+    }
+  ];
+
+  $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+
+  $scope.addItem = function() {
+    var newItemNo = $scope.items.length + 1;
+    $scope.items.push('Item ' + newItemNo);
+  };
+
+  $scope.status = {
+    isFirstOpen: true,
+    isFirstDisabled: false
+  };
 
 }]);
 // end myApp.controller('MyController', function MyController($scope) {

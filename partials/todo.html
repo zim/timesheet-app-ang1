@@ -1,0 +1,132 @@
+<!-- <div id="result"></div> -->
+  
+<div>
+  
+    <script type="text/ng-template" id="group-template.html">
+    <div class="panel {{panelClass || 'panel-default'}}">
+      <div class="panel-heading">
+        <h4 class="panel-title" style="color:#fa39c3">
+          <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading"><span
+            ng-class="{'text-muted': isDisabled}">{{heading}}</span></a>
+        </h4>
+      </div>
+      <div class="panel-collapse collapse" uib-collapse="!isOpen">
+        <div class="panel-body" style="text-align: right" ng-transclude></div>
+      </div>
+    </div>
+  </script>
+  
+
+  <p>
+    <button type="button" class="btn btn-default btn-sm" ng-click="status.open = !status.open">Toggle last panel</button>
+    <button type="button" class="btn btn-default btn-sm" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">Enable / Disable first panel</button>
+  </p>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="oneAtATime">
+      Open only one at a time
+    </label>
+  </div>
+
+  <uib-accordion close-others="oneAtATime">
+    <uib-accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+      This content is straight in the template.
+    </uib-accordion-group>
+    <uib-accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+      {{group.content}}
+    </uib-accordion-group>
+    <uib-accordion-group heading="Dynamic Body Content">
+      <p>The body of the uib-accordion group grows to fit the contents</p>
+      <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+      <div ng-repeat="item in items">{{item}}</div>
+    </uib-accordion-group>
+    <uib-accordion-group heading="Custom template" template-url="group-template.html">
+      Hello
+    </uib-accordion-group>
+    <uib-accordion-group heading="Delete account" panel-class="panel-danger">
+      <p>Please, to delete your account, click the button below</p>
+      <button class="btn btn-danger">Delete</button>
+    </uib-accordion-group>
+    <uib-accordion-group is-open="status.open">
+      <uib-accordion-heading>
+        I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      </uib-accordion-heading>
+      This is just some content to illustrate fancy headings.
+    </uib-accordion-group>
+  </uib-accordion>
+
+</div>
+
+
+
+
+  <div id="header" class="row row-logo">
+    <section class="layout info-wrapper">
+
+
+
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h1>TIMESHEET APP TO DO</h1>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+
+            <div class="modal-body">
+
+              <ul class="todo-items-main">
+
+                <li>COMPLETE EDIT ITEM FUNCTIONALITY:</li>
+
+                <li>ADD BUDGET MODEL FUNCTIONALITY:</li>
+
+                <li>ADD PAGING FUNCTIONALITY:</li>
+
+                <li>RATIONALIZE CREATE SELECT LIST FUNCTIONS:</li>
+
+                <li>USE ANGULAR DIRECTIVES? ng-repeat etc??:</li>
+
+                <li>ADD JOB FORM:
+                  <ul>
+                    <li>Make start time start from 9am.</li>
+                    <li>Make finish time start at start time.</li>
+                  </ul>
+                </li>
+
+                <li>USE populate_week_range_options() FUNCTION TO CREATE FILTER FOR WEEK BEGINING AND CREATE REPORTS ETC:
+                  <ul>
+                    <li>Use Bootstrap Datepicker to choose date begining? HILIGHT MONDAYS ON WIDGET? IS THIS POSSIBLE?</li>
+                    <li>Yes it is with, daysOfWeekDisabled option. bootstrap datepicker options... http://stackoverflow.com/questions/10234153/limit-bootstrap-datepicker-to-weekdays-only</li>
+                    <li>https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=bootstrap%20datetimepicker%20days%20of%20week%20disabled</li>
+                    <li>http://bootstrap-datepicker.readthedocs.org/en/latest/options.html</li>
+                  </ul>
+                </li>
+
+                <li>MAKE DAILY REPORTS:
+
+
+
+                  <ul>
+                    <li>Use Bootstrap Datepicker to choose days?</li>
+                    <li>Include all relevant information: jobs List (and data eg: times, duration, notes, number, client etc...)</li>
+                  </ul>
+
+                </li>
+                
+              </ul>
+
+            </div>
+
+            <div class="modal-footer">
+              ?? CREATE FORM ENTRY SYSTEM TO ADD TO TODO LIST HERE?<BR />
+               WOULD HAVE TO USE LOCAL STORAGE ALSO!!
+            </div>
+
+          </div>
+      
+      <!-- END MODAL SECTION -->
+
+
+    </section>
+  </div>
