@@ -1,0 +1,44 @@
+<div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+
+            <label>Date</label>
+
+              <!-- <input type="date" class="" datepicker-popup is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" id="textboxDateadd" /> -->
+
+<input id="textboxDateadd">
+
+              <div class="form-row">
+                <label>Client</label>
+                <input type="text" name="add_item_client" id="textboxClientadd">
+              </div>
+              <div class="form-row">
+                <label>Reference</label>
+                <input type="text" name="add_item_ref" id="textboxRefadd">
+              </div>
+              <div class="form-row">
+                <label>Number</label>
+                <input type="text" name="add_item_number" id="textboxNumberadd">
+              </div>
+              <div class="form-row">
+                <label>Start Time</label>
+                <input type="text" id="textboxJobStartadd" class="timepickernew ui-timepicker-input" placeholder="Job Start" autocomplete="off">
+              </div>
+              <div class="form-row">
+                <label>Finish Time</label>
+                <input type="text" id="textboxJobFinishadd" class="timepickernew ui-timepicker-input" placeholder="Job Finish" autocomplete="off">
+              </div>
+
+            
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>

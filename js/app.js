@@ -56,10 +56,10 @@ myApp.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'partials/edit.html',
 		controller: 'EditItemController'
 	}).
-	when('/addjob', {
-		templateUrl: 'partials/addjob.html',
-		controller: 'AddJobController'
-	}).
+	// when('/addjob', {
+	// 	templateUrl: 'partials/addjob.html',
+	// 	controller: 'AddJobController'
+	// }).
 	when('/info', {
 		templateUrl: 'partials/info.html',
 		controller: 'InfoController'
@@ -67,6 +67,10 @@ myApp.config(['$routeProvider', function($routeProvider){
 	when('/todo', {
 		templateUrl: 'partials/todo.html',
 		controller: 'TodoController'
+	}).
+	when('/modal', {
+		templateUrl: 'partials/modal.html',
+		controller: 'ModalDemoCtrl'
 	}).
 	otherwise({
 		redirectTo: '/list'

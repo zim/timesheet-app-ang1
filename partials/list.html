@@ -22,7 +22,7 @@ other filters:  | orderBy:'client',
 -->
 <div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray | filter: query | orderBy: jobsOrder">
 
-  <div class="col-md-2 span-client">{{job.date}}<span class="span-start-time"><span>Start Time:</span> {{job.jobstart}}</span><span class="span-finish-time"><span>Finish Time:</span> {{job.jobfinish}}</span><span class="span-duration"><span>Duration:</span> {{job.duration}}</span></div>
+  <div class="col-md-2 span-client">{{job.date | date:"dd/MM/yyyy"}}<span class="span-start-time"><span>Start Time:</span> {{job.jobstart}}</span><span class="span-finish-time"><span>Finish Time:</span> {{job.jobfinish}}</span><span class="span-duration"><span>Duration:</span> <span></span> {{getJobDuration(job.jobstart,job.jobfinish)}}</span></div>
 
   <div class="col-md-3 span-client" data-index="{{$index}}" id="{{$index}}_tShowClient">{{job.client | uppercase}}<a href="#/details/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnShowClient" data-index="{{$index}}">[VIEW {{$index}}]</a></div>
 

@@ -572,6 +572,9 @@ div[class^="col-"], div[class*="col-"] {
 /* line 314, ../sass/partials/layout.scss */
 .row {
   background-color: yellow;
+      margin-left: 0;
+    margin-right: 0;
+
 }
 /* line 317, ../sass/partials/layout.scss */
 .row.offset {
@@ -834,4 +837,9 @@ div[class^="col-"], div[class*="col-"] {
 /* line 589, ../sass/partials/layout.scss */
 body {
   outline: 0px solid red;
+}
+
+.form-control{
+  display: inline-block;
+    width: auto;
 }

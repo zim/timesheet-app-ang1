@@ -1,49 +1,36 @@
-<section class="addjobpage">
-  <!-- SEARCH DIRECTORY -->
-  <a href="#/list" class="btn btn-left">BACK</a>
-  <!-- <a href="#/details/{{prevItem}}" class="btn btn-left">&lt;</a>
-  <a href="#/details/{{nextItem}}" class="btn btn-right">&gt;</a> -->
+<div class="modal-header">
+            <h3 class="modal-title">ADD JOB</h3>
+        </div>
+        <div class="modal-body">
+            <!-- <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b> -->
 
-  <div class="job cf" ng-model="jobsArray">
-
-    
-
-    <form novalidate class="simple-form">
-		<!-- Name: <input type="text" ng-model="user.name" /><br />
-		E-mail: <input type="email" ng-model="user.email" /><br />
-		Gender: <input type="radio" ng-model="user.gender" value="male" />male
-		<input type="radio" ng-model="user.gender" value="female" />female<br />
-		<input type="button" ng-click="reset()" value="Reset" />
-		<input type="submit" ng-click="update(user)" value="Save" /> -->
+            <div id="form_edit_item">
+            Date: <input type="date" name="myinputdate" id="textboxDateadd20" class="form-control" uib-datepicker-popup="{{format}}" ng-model="job.date" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
 
 
-		<div id="form_edit_item">
-			Date: <input type="DATE" name="myinputdate" id="textboxDateadd20" datepicker-popup="null" ng-model="job.date" /><br />
-			Client: <input type="TEXT" name="myinputclient" id="textboxClientadd20" ng-model="job.client" /><br />
-			Ref: <input type="TEXT" name="myinputref" id="textboxRefadd20" ng-model="job.ref" /><br />
-			Number: <input type="TEXT" name="myinputnumber" id="textboxNumberadd20" ng-model="job.number" /><br />
-			Start: <input type="text" id="textboxJobStartadd" class="timepickernew" placeholder="Job Start" ng-model="job.jobstart" />
+
+            <!-- <input type="DATE" name="myinputdate" id="textboxDateadd20" datepicker-popup="null" ng-model="job.date" value="" /> --><br />
+            Client: <input type="TEXT" name="myinputclient" id="textboxClientadd20" ng-model="job.client" /><br />
+            Ref: <input type="TEXT" name="myinputref" id="textboxRefadd20" ng-model="job.ref" /><br />
+            Number: <input type="TEXT" name="myinputnumber" id="textboxNumberadd20" ng-model="job.number" /><br />
+            Start: <uib-timepicker name="myinputst" id="textboxJobStart" ng-model="job.jobstart" ng-change="changed()" hour-step="1" minute-step="30" show-meridian="true"></uib-timepicker>
 
 
-			<!-- <input type="TEXT" name="myinputst" id="textboxJobStartadd20" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobstart" /> -->
 
+            <!-- <input type="TEXT" name="myinputst" id="textboxJobStart" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobstart" /> --><br />
+            Finish: <input type="TEXT" name="myinputft" id="textboxJobFinish" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobfinish" /><br />
 
-			<br />
-			Finish: 
+            <!-- <input type="submit" ng-click="addJob(job)" value="Save" /> -->
+        </div>
 
-			<input type="text" id="textboxJobFinishadd" class="timepickernew" placeholder="Job Finish" ng-model="job.jobfinish" />
-
-			<!-- <input type="TEXT" name="myinputft" id="textboxJobFinishadd20" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobfinish" /> -->
-
-
-			<br />
-
-			<input type="submit" ng-click="addJob(job)" value="Save" />
-		</div>
-
-
-	</form>
-    
-  </div>
-
-</section>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="addJob(job)">SAVE</button>
+            <!-- <button class="btn btn-primary" type="button" ng-click="ok()">OK</button> -->
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
