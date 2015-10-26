@@ -23,7 +23,12 @@
 
 
             <!-- <input type="TEXT" name="myinputst" id="textboxJobStart" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobstart" /> --><br />
-            Finish: <input type="TEXT" name="myinputft" id="textboxJobFinish" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobfinish" /><br />
+            Finish: <uib-timepicker name="myinputft" id="textboxJobFinish" ng-model="job.jobfinish" ng-change="changed()" hour-step="1" minute-step="30" show-meridian="true"></uib-timepicker>
+
+
+
+
+            <!-- <input type="TEXT" name="myinputft" id="textboxJobFinish" class="timepicker ui-timepicker-input" autocomplete="off" ng-model="job.jobfinish" /> --><br />
 
             <!-- <input type="submit" ng-click="addJob(job)" value="Save" /> -->
         </div>

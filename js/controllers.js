@@ -131,7 +131,7 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$filter
 }]);
 // end myApp.controller('MyController', function MyController($scope) {
 
-	jobControllers.controller('DetailsController', ['$scope', '$http', 'Data', '$routeParams', function ($scope, $http, Data, $routeParams) {
+jobControllers.controller('DetailsController', ['$scope', '$http', 'Data', '$routeParams', function ($scope, $http, Data, $routeParams) {
 
 		$scope.jobsArray = Data;
 		$scope.whichItem = $routeParams.itemId;
@@ -149,10 +149,10 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$filter
 		}
 
 		// can edit a`nd update local storage here?
-	}]);
+}]);
 // end myApp.controller('MyController', function MyController($scope) {
 
-	jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$routeParams', function ($scope, $http, Data, $routeParams) {
+jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$routeParams', function ($scope, $http, Data, $routeParams) {
 
 		
 
@@ -213,7 +213,7 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$filter
 
 		//console.log($scope.jobsArray);
 
-	}]);
+}]);
 // end myApp.controller('EditItemController', function MyController($scope) {
 
 jobControllers.controller('ModalAddCtrl', ['$scope', 'Data', '$uibModal', '$log', function ($scope, Data, $uibModal, $log) {
@@ -281,9 +281,49 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 
 		var tempNewDat = $scope.master.date.toLocaleDateString();
 
+		// STARTTIME ADJUSTMENTS
 		$scope.mytime = $scope.master.jobstart;
+		$scope.hourStart = $scope.mytime.getHours();
+		var meridianTemp;
 
-		var tempNewJSTime = "" + $scope.mytime.getHours() + ":" + $scope.mytime.getMinutes() + "am";
+		if($scope.hourStart > 12){
+			$scope.hourStart = $scope.hourStart-12;
+			meridianTemp = "pm";
+		}else{
+
+			if($scope.hourStart === 0){
+				$scope.hourStart = 12;
+				meridianTemp = "am";
+			}else if($scope.hourStart === 12){
+				meridianTemp = "pm";
+			}else{
+				meridianTemp = "am";
+			}
+		}
+		//console.log("new values = " + $scope.hourStart + "" + meridianTemp +  "");
+		var tempNewJSTime = "" + $scope.hourStart + ":" + $scope.mytime.getMinutes() + "" + meridianTemp +  "";
+
+		// FINISHTIME ADJUSTMENTS
+		$scope.mytimeFinish = $scope.master.jobfinish;
+		$scope.hourFinish = $scope.mytimeFinish.getHours();
+		var meridianTemp1;
+
+		if($scope.hourFinish > 12){
+			$scope.hourFinish = $scope.hourFinish-12;
+			meridianTemp1 = "pm";
+		}else{
+
+			if($scope.hourFinish === 0){
+				$scope.hourFinish = 12;
+				meridianTemp1 = "am";
+			}else if($scope.hourFinish === 12){
+				meridianTemp1 = "pm";
+			}else{
+				meridianTemp1 = "am";
+			}
+		}
+		//console.log("new values = " + $scope.hourStart + "" + meridianTemp +  "");
+		var tempNewJFTime = "" + $scope.hourFinish + ":" + $scope.mytimeFinish.getMinutes() + "" + meridianTemp1 +  "";
 
 		console.log('$scope.mytime.getHours() = ' + $scope.mytime.getHours());
 		console.log('$scope.mytime.getMinutes() = ' + $scope.mytime.getMinutes());
@@ -293,7 +333,7 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 		console.log("addJob $scope.master.ref = " + $scope.master.ref);
 		console.log("addJob $scope.master.number = " + $scope.master.number);
 		console.log("addJob $scope.master.jobstart = " + tempNewJSTime);
-		console.log("addJob $scope.master.jobfinish = " + $scope.master.jobfinish);
+		console.log("addJob $scope.master.jobfinish = " + tempNewJFTime);
 
 		$scope.jobsArray.push({
 			date: tempNewDat,
@@ -301,7 +341,7 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 			ref: $scope.master.ref, 
 			number: $scope.master.number, 
 			jobstart: tempNewJSTime, 
-			jobfinish: $scope.master.jobfinish,
+			jobfinish: tempNewJFTime,
 			active: true
 		});
 
@@ -322,7 +362,7 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 	  //$scope.jobsArray[$scope.whichItem].client = $scope.master.client;
 	  //console.log($scope.jobsArray[$scope.whichItem].client);
 
-	  //localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
+	  localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
 
 	  $modalInstance.close();
 
