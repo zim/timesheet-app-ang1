@@ -474,16 +474,13 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 }]);
 // end myApp.controller('AddJobController', function MyController($scope) {
 
-	jobControllers.controller('InfoController', ['$scope', 'Data', function ($scope, Data) {
+jobControllers.controller('InfoController', ['$scope', 'Data', function ($scope, Data) {
 
-		$scope.jobsArray = Data;
+	$scope.jobsArray = Data;
 
-		console.log($scope.jobsArray);
+	console.log($scope.jobsArray);
 
-
-
-
-	}]);
+}]);
 // end myApp.controller('MyController', function MyController($scope) {
 
 
