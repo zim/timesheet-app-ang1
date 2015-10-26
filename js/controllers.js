@@ -1,6 +1,6 @@
 var jobControllers = angular.module('jobControllers', ['ui.bootstrap']);
 
-jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$filter', function ($scope, $http, Data, $filter) {
+jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$uibModal', '$log', '$filter', function ($scope, $http, Data, $uibModal, $log, $filter) {
 
 	$scope.jobsArray = Data;
 
@@ -123,6 +123,34 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$filter
         //return 'abc';
     };
 
+
+
+	$scope.animationsEnabled = true;
+
+    // EDIT ITEM
+    $scope.openEdit = function(jobId) {
+
+    	console.log('jobId = ' + jobId);
+
+    	$scope.jobId = jobId;
+
+	      $scope.modalInstance = $uibModal.open({
+	      	templateUrl: 'partials/edit.html',
+			controller: 'EditItemController',
+	        scope: $scope
+	      });
+
+	      $scope.modalInstance.result.then(function () {
+				//$scope.selected = selectedItem;
+			}, function () {
+				$log.info('Modal edit item dismissed at: ' + new Date());
+			});
+	};// END $scope.openEdit = function(jobId) {
+
+    $scope.toggleAnimation = function () {
+		$scope.animationsEnabled = !$scope.animationsEnabled;
+	};
+
 	// console.log(Data);
 	// console.log(angular.fromJson(Data));
 	// console.log(angular.toJson(Data));
@@ -152,20 +180,65 @@ jobControllers.controller('DetailsController', ['$scope', '$http', 'Data', '$rou
 }]);
 // end myApp.controller('MyController', function MyController($scope) {
 
-jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$routeParams', function ($scope, $http, Data, $routeParams) {
 
+// EIDT JOB ITEM STUFF
+jobControllers.controller('ModalEditCtrl', ['$scope', 'Data', '$uibModal', '$log', function ($scope, Data, $uibModal, $log) {
+
+		console.log('ModalEditCtrl CALLED');
+
+		$scope.jobsArray = Data;
+
+		console.log($scope.jobsArray);
+
+		$scope.animationsEnabled = true;
 		
+		$scope.open = function() {
+	      $scope.modalInstance = $uibModal.open({
+	      	templateUrl: 'partials/edit.html',
+			controller: 'EditItemController',
+	        scope: $scope
+	      });
 
+	      $scope.modalInstance.result.then(function () {
+				//$scope.selected = selectedItem;
+			}, function () {
+				$log.info('Modal edit item dismissed at: ' + new Date());
+			});
+	    };
+
+
+		// $scope.ok = function () {
+		// 	console.log('$scope.ok = function () {');
+		// 	$scope.modalInstance.close();
+		// };
+
+		$scope.toggleAnimation = function () {
+			$scope.animationsEnabled = !$scope.animationsEnabled;
+		};
+
+		// $scope.cancel = function () {
+		// 	console.log('$scope.cancel = function () {');
+		// 	$scope.modalInstance.dismiss('cancel');
+		// };
+
+}]);
+// end myApp.controller('MyController', function MyController($scope) {
+
+
+jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$routeParams', '$modalInstance', '$log', function ($scope, $http, Data, $routeParams, $modalInstance, $log) {
 		//$('input.timepicker').timepicker({});
 
 		$scope.jobsArray = Data;
-		$scope.whichItem = $routeParams.itemId;
+		//$scope.whichItem = $routeParams.itemId;
+		$scope.whichItem = $scope.jobId;
 
 		$scope.master = {};
 
 		//job.client = "heeeel";
 
 		console.log($scope.jobsArray);
+
+		console.log(this);
 
 		console.log($scope.whichItem);
 
@@ -177,23 +250,31 @@ jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$ro
 			ref: $scope.jobsArray[$scope.whichItem].ref,
 			number: $scope.jobsArray[$scope.whichItem].number,
 			jobstart: $scope.jobsArray[$scope.whichItem].jobstart,
-			jobfinish: $scope.jobsArray[$scope.whichItem].jobstart
+			jobfinish: $scope.jobsArray[$scope.whichItem].jobfinish
 		}
 
 		//console.log($scope.job.date);
 
 		//console.log()
 
+		$scope.job.date = new Date($scope.jobsArray[$scope.whichItem].date);
+
+
+
+
+
 		$scope.update = function(job) {
 			//console.log();
 			$scope.master = angular.copy(job);
+
+			var tempNewDat = $scope.job.date.toLocaleDateString();
 
 			console.log("update $scope.master.date = " + $scope.master.date);
 			console.log("update $scope.master.client = " + $scope.master.client);
 
 			console.log($scope.jobsArray[$scope.whichItem].client);
 
-			$scope.jobsArray[$scope.whichItem].date = $scope.master.date;
+			$scope.jobsArray[$scope.whichItem].date = tempNewDat;
 			$scope.jobsArray[$scope.whichItem].client = $scope.master.client;
 			$scope.jobsArray[$scope.whichItem].ref = $scope.master.ref;
 			$scope.jobsArray[$scope.whichItem].number = $scope.master.number;
@@ -202,14 +283,21 @@ jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$ro
 
 			console.log($scope.jobsArray[$scope.whichItem].client);
 
+			console.log("update tempNewDat = " + tempNewDat);
+
 		  //localStorage.setItem('jobsObject', JSON.stringify($scope.jobsArray));
-		  localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
+		  //localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
 
 		};
 
 		console.log("update $scope.master.date = " + $scope.master.date);
 		console.log("update $scope.jobsArray[$scope.whichItem].client = " + $scope.jobsArray[$scope.whichItem].client);
 		console.log("$scope.master = " + $scope.master);
+
+		$scope.cancel = function () {
+			console.log('$scope.cancel EDIT ITEM = function 222 () {');
+			$modalInstance.dismiss('cancelled edit item');
+		};
 
 		//console.log($scope.jobsArray);
 

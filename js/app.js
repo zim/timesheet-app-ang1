@@ -52,10 +52,10 @@ myApp.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'partials/details.html',
 		controller: 'DetailsController'
 	}).
-	when('/edit/:itemId', {
-		templateUrl: 'partials/edit.html',
-		controller: 'EditItemController'
-	}).
+	// when('/edit/:itemId', {
+	// 	templateUrl: 'partials/edit.html',
+	// 	controller: 'EditItemController'
+	// }).
 	// when('/addjob', {
 	// 	templateUrl: 'partials/addjob.html',
 	// 	controller: 'AddJobController'

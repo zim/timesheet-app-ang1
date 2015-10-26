@@ -36,6 +36,8 @@ other filters:  | orderBy:'client',
 
       <a href="#/edit/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnEditItem" data-index="{{$index}}" class="control-btn btn-edit">Edit</a>
 
+      <button type="button" class="btn btn-default" data-index="{{$index}}" ng-click="openEdit($index)">Edit me!</button>
+
       <button id="{{$index}}_btnDeleteItem" data-index-number="{{$index}}" class="control-btn btn-delete" ng-click="delete()"></button>
     </div>
   </div>
