@@ -31,8 +31,8 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$uibMod
 
 	$scope.getJobDuration = function(start,finish) {
 
-		console.log("start = " + start);
-		console.log("finish = " + finish);
+		//console.log("start = " + start);
+		//console.log("finish = " + finish);
 
 
 		var time1 = start;
@@ -253,14 +253,107 @@ jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$ro
 			jobfinish: $scope.jobsArray[$scope.whichItem].jobfinish
 		}
 
-		//console.log($scope.job.date);
-
-		//console.log()
+		console.log($scope.job.date);
 
 		$scope.job.date = new Date($scope.jobsArray[$scope.whichItem].date);
 
+		//$scope.job.jobstart = new Date($scope.jobsArray[$scope.whichItem].jobstart);
 
 
+		var d = new Date(),
+		    s = $scope.jobsArray[$scope.whichItem].jobstart;
+
+		    console.log("d = " + d);
+		    
+
+		    console.log("s = " + s);
+		    
+		var startMerid = s.slice(-2); // find out am or pm
+		console.log("startMerid = " + startMerid);
+
+		s=s.slice(0,-2); //slice off last two characters here
+
+		console.log("s 1 = " + s);
+
+		var startSplit = s.split(':');
+        
+
+        var stHours1 = parseInt(startSplit[0], 10);
+        var stMins1 = parseInt(startSplit[1], 10);
+
+        console.log("stHours1 = " + stHours1 + ": stMins1 = " + stMins1);
+
+        if(startMerid==="am"){
+            //console.log('time2Sliced==am');
+
+        }else{
+            //console.log('time2Sliced==pm');
+
+            if(stHours1===12){
+
+            }else{
+            	stHours1 = stHours1+12;
+            }
+        }
+
+		d.setHours(stHours1);
+
+		console.log("d1 = " + d);
+
+		d.setMinutes(stMins1);
+
+		console.log("d2 = " + d);
+
+		$scope.job.jobstart = d;
+
+		console.log('$scope.job.jobstart = ' + $scope.job.jobstart);
+
+		// FINISH TIME STUFF
+		var dft = new Date(),
+		    f = $scope.jobsArray[$scope.whichItem].jobfinish;
+
+		    console.log("dft = " + dft);
+		    console.log("f = " + f);
+		    
+		var finishMerid = f.slice(-2); // find out am or pm
+		console.log("finishMerid = " + finishMerid);
+
+		f=f.slice(0,-2); //slice off last two characters here
+
+		console.log("f 1 = " + f);
+
+		var finishSplit = f.split(':');
+        
+
+        var ftHours1 = parseInt(finishSplit[0], 10);
+        var ftMins1 = parseInt(finishSplit[1], 10);
+
+        console.log("ftHours1 = " + ftHours1 + ": ftMins1 = " + ftMins1);
+
+        if(finishMerid==="am"){
+            //console.log('time2Sliced==am');
+
+        }else{
+            //console.log('time2Sliced==pm');
+
+            if(ftHours1===12){
+
+            }else{
+            	ftHours1 = ftHours1+12;
+            }
+        }
+
+		dft.setHours(ftHours1);
+
+		console.log("f1 = " + f);
+
+		dft.setMinutes(ftMins1);
+
+		console.log("f2 = " + f);
+
+		$scope.job.jobfinish = dft;
+
+		console.log('$scope.job.jobfinish = ' + $scope.job.jobfinish);
 
 
 		$scope.update = function(job) {
@@ -272,21 +365,68 @@ jobControllers.controller('EditItemController', ['$scope', '$http', 'Data', '$ro
 			console.log("update $scope.master.date = " + $scope.master.date);
 			console.log("update $scope.master.client = " + $scope.master.client);
 
-			console.log($scope.jobsArray[$scope.whichItem].client);
+			//console.log($scope.jobsArray[$scope.whichItem].client);
+
+			// STARTTIME ADJUSTMENTS
+			$scope.myEditStartime = $scope.master.jobstart;
+			$scope.editHourStart = $scope.myEditStartime.getHours();
+			var meridianTemp;
+
+			if($scope.editHourStart > 12){
+				$scope.editHourStart = $scope.editHourStart-12;
+				meridianTemp = "pm";
+			}else{
+
+				if($scope.editHourStart === 0){
+					$scope.editHourStart = 12;
+					meridianTemp = "am";
+				}else if($scope.editHourStart === 12){
+					meridianTemp = "pm";
+				}else{
+					meridianTemp = "am";
+				}
+			}
+			//console.log("new values = " + $scope.hourStart + "" + meridianTemp +  "");
+			var tempNewJSTime = "" + $scope.editHourStart + ":" + $scope.myEditStartime.getMinutes() + "" + meridianTemp +  "";
+
+			// FINISHTIME ADJUSTMENTS
+			$scope.myEditFinishtime = $scope.master.jobfinish;
+			$scope.editHourFinish = $scope.myEditFinishtime.getHours();
+			var meridianFtTemp;
+
+			if($scope.editHourFinish > 12){
+				$scope.editHourFinish = $scope.editHourFinish-12;
+				meridianFtTemp = "pm";
+			}else{
+
+				if($scope.editHourFinish === 0){
+					$scope.editHourFinish = 12;
+					meridianFtTemp = "am";
+				}else if($scope.editHourFinish === 12){
+					meridianFtTemp = "pm";
+				}else{
+					meridianFtTemp = "am";
+				}
+			}
+			//console.log("new values = " + $scope.hourStart + "" + meridianTemp +  "");
+			var tempNewJFTime = "" + $scope.editHourFinish + ":" + $scope.myEditFinishtime.getMinutes() + "" + meridianFtTemp +  "";
+
 
 			$scope.jobsArray[$scope.whichItem].date = tempNewDat;
 			$scope.jobsArray[$scope.whichItem].client = $scope.master.client;
 			$scope.jobsArray[$scope.whichItem].ref = $scope.master.ref;
 			$scope.jobsArray[$scope.whichItem].number = $scope.master.number;
-			$scope.jobsArray[$scope.whichItem].jobstart = $scope.master.jobstart;
-			$scope.jobsArray[$scope.whichItem].jobfinish = $scope.master.jobfinish;
+			$scope.jobsArray[$scope.whichItem].jobstart = tempNewJSTime;
+			$scope.jobsArray[$scope.whichItem].jobfinish = tempNewJFTime;
 
 			console.log($scope.jobsArray[$scope.whichItem].client);
 
 			console.log("update tempNewDat = " + tempNewDat);
 
 		  //localStorage.setItem('jobsObject', JSON.stringify($scope.jobsArray));
-		  //localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
+		  	localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
+
+		  	$modalInstance.close();
 
 		};
 
@@ -358,6 +498,10 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 	console.log($scope.jobsArray);
 
 	$scope.mytime = new Date();
+
+	//$scope.job.jobstart = new Date();
+
+	//$scope.job.jobstart.setMinutes(00);
 
 	$scope.addJob = function(job) {
 
