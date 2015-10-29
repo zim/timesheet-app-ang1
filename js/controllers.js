@@ -4,22 +4,52 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$uibMod
 
 	$scope.jobsArray = Data;
 
-	$scope.delete = function() {
+	$scope.setState = function() {
+
 		console.log(this.job.$$hashKey);
 
-		var found = $filter('filter')($scope.jobsArray, {$$hashKey: this.job.$$hashKey}, true);
+		console.log(this.job.active);
+
+		console.log($scope.jobsArray);
+
+		if(this.job.active){
+			this.job.active = false;
+		}else{
+			this.job.active = true;
+		}
+
+		console.log(this.job.active);
+
+		console.log($scope.jobsArray);
+
+		localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
+
+	}// end setState
+
+	$scope.delete = function(index) {
+
+		console.log('index = ' + index);
+
+		console.log($scope.jobsArray);
+
+		$scope.jobsArray.splice(index, 1);
+
+		console.log($scope.jobsArray);
+
+		localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
+
+		// var found = $filter('filter')($scope.jobsArray, {$$hashKey: this.job.$$hashKey}, true);
 		
+		// if (found.length) {
+		// 	$scope.selected = JSON.stringify(found[0]);
 
-		if (found.length) {
-			$scope.selected = JSON.stringify(found[0]);
+	 //         //fruits.splice(2, 1, "Lemon", "Kiwi");
 
-	         //fruits.splice(2, 1, "Lemon", "Kiwi");
-
-	         console.log($scope.selected);
-	     } else {
-	     	$scope.selected = 'Not found';
-	     	console.log($scope.selected);
-	     }
+	 //         console.log($scope.selected);
+	 //     } else {
+	 //     	$scope.selected = 'Not found';
+	 //     	console.log($scope.selected);
+	 //     }
 
 		//console.log(this.dataset.indexNumber);
 
@@ -28,6 +58,18 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$uibMod
 	    //$scope.msg = 'clicked';
 
 	}// end DELETE
+
+	$scope.setStateClass = function(active) {
+
+		//console.log(active);
+
+		if(active===true){
+			return 'btn-active-on';
+		}else{
+			return 'btn-active-off';
+		}
+		
+	}// END $scope.setStateClass = function(active) {
 
 	$scope.getJobDuration = function(start,finish) {
 
@@ -107,14 +149,6 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$uibMod
 
         hours = hours.toFixed(2);
 
-        // console.log("time1 = " + time1);
-        // console.log("time2 = " + time2);
-
-        // console.log("hours1 = " + hours1);
-        // console.log("hours2 = " + hours2);
-
-         //console.log("hours = " + hours);
-
          duration = hours;
 
          return duration;
@@ -150,6 +184,25 @@ jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$uibMod
     $scope.toggleAnimation = function () {
 		$scope.animationsEnabled = !$scope.animationsEnabled;
 	};
+
+
+	// PAGINATION STUFF
+	$scope.viewby = 10;
+    $scope.totalItems = $scope.jobsArray.length;
+
+    console.log('$scope.totalItems  = ' + $scope.totalItems);
+
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = $scope.viewby;
+    //$scope.maxSize = 5; //Number of pager buttons to show
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    console.log('Page changed to: ' + $scope.currentPage);
+  };
 
 	// console.log(Data);
 	// console.log(angular.fromJson(Data));

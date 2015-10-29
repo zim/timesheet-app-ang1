@@ -20,7 +20,7 @@
         <!--
 other filters:  | orderBy:'client', 
 -->
-<div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray | filter: query | orderBy: jobsOrder">
+<div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | filter: query | orderBy: jobsOrder">
 
   <div class="col-md-2 span-client">{{job.date | date:"dd/MM/yyyy"}}<span class="span-start-time"><span>Start Time:</span> {{job.jobstart}}</span><span class="span-finish-time"><span>Finish Time:</span> {{job.jobfinish}}</span><span class="span-duration"><span>Duration:</span> <span></span> {{getJobDuration(job.jobstart,job.jobfinish)}}</span></div>
 
@@ -31,16 +31,21 @@ other filters:  | orderBy:'client',
   <div class="col-md-4-end span-ref">{{job.ref}}
 
     <div class="iconWrapElement">
-      <button id="{{$index}}_btnSetState" data-index="{{$index}}" class="control-btn btn-active-off"></button>
-      <button id="{{$index}}_btnEditItem" data-index="{{$index}}" data-toggle="modal" data-target="#modal{{$index}}" class="control-btn btn-edit"></button>
+      <button id="{{$index}}_btnSetState" data-index="{{$index}}" class="control-btn {{setStateClass(job.active)}}" ng-click="setState()"></button>
+      <!-- <button id="{{$index}}_btnEditItem" data-index="{{$index}}" data-toggle="modal" data-target="#modal{{$index}}" class="control-btn btn-edit"></button>
 
-      <a href="#/edit/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnEditItem" data-index="{{$index}}" class="control-btn btn-edit">Edit</a>
+      <a href="#/edit/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnEditItem" data-index="{{$index}}" class="control-btn btn-edit">Edit</a> -->
 
-      <button type="button" class="btn btn-default" data-index="{{$index}}" ng-click="openEdit($index)">Edit me!</button>
+      <button type="button" class="control-btn btn-edit" data-index="{{$index}}" ng-click="openEdit($index)"></button>
 
-      <button id="{{$index}}_btnDeleteItem" data-index-number="{{$index}}" class="control-btn btn-delete" ng-click="delete()"></button>
+      <button id="{{$index}}_btnDeleteItem" data-index-number="{{$index}}" class="control-btn btn-delete" ng-click="delete($index)"></button>
     </div>
   </div>
 </div>
 
+
+
+<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></uib-pagination>
+
 </section>
+
