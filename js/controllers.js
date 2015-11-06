@@ -550,12 +550,19 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 
 	console.log($scope.jobsArray);
 
+    // start time stuff
 	$scope.mytime = new Date();
+    console.log($scope.mytime);
+    $scope.mytime.setMinutes(00);
+    console.log($scope.mytime);
+    
+    // finish time stuff
+	$scope.mytimeFinish = new Date();
+    console.log($scope.mytimeFinish);
+    $scope.mytimeFinish.setMinutes(00);
+    console.log($scope.mytimeFinish);
 
-	//$scope.job.jobstart = new Date();
-
-	//$scope.job.jobstart.setMinutes(00);
-
+    
 	$scope.addJob = function(job) {
 
 		console.log("$scope.addJob = function(job) { CALLED ========");
@@ -567,7 +574,7 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 		var tempNewDat = $scope.master.date.toLocaleDateString();
 
 		// STARTTIME ADJUSTMENTS
-		$scope.mytime = $scope.master.jobstart;
+		//$scope.mytime = $scope.master.jobstart;
 		$scope.hourStart = $scope.mytime.getHours();
 		var meridianTemp;
 
@@ -589,7 +596,7 @@ jobControllers.controller('AddJobController', ['$scope', '$http', 'Data', '$moda
 		var tempNewJSTime = "" + $scope.hourStart + ":" + $scope.mytime.getMinutes() + "" + meridianTemp +  "";
 
 		// FINISHTIME ADJUSTMENTS
-		$scope.mytimeFinish = $scope.master.jobfinish;
+		//$scope.mytimeFinish = $scope.master.jobfinish;
 		$scope.hourFinish = $scope.mytimeFinish.getHours();
 		var meridianTemp1;
 
