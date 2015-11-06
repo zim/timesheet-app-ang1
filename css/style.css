@@ -571,7 +571,7 @@ div[class^="col-"], div[class*="col-"] {
 
 /* line 314, ../sass/partials/layout.scss */
 .row {
-  background-color: yellow;
+  background-color: #000000;
       margin-left: 0;
     margin-right: 0;
 
