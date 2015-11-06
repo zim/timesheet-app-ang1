@@ -1,7 +1,8 @@
 var myApp = angular.module('myApp', [
 
 	'ngRoute',
-	'jobControllers'
+	'jobControllers',
+	'jobFilters'
 
 ]);
 
