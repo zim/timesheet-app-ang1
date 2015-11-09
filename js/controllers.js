@@ -1,5 +1,60 @@
 var jobControllers = angular.module('jobControllers', ['ui.bootstrap']);
 
+jobControllers.controller('FilterController', ['$scope', '$http', 'Data', '$uibModal', '$log', '$filter', function ($scope, $http, Data, $uibModal, $log, $filter) {
+    
+    $scope.jobsArray = Data;
+    
+    console.log('hit 1');
+    
+    
+    $scope.players = [
+      {name: 'Gene', team: 'alpha'},
+      {name: 'George', team: 'beta'},
+      {name: 'Steve', team: 'gamma'},
+      {name: 'Paula', team: 'beta'},
+      {name: 'Scruath', team: 'gamma'}
+    ];
+    
+    console.log('hit 2');
+    
+    var uniqueItems = function (data, key) {
+        var result = [];
+        for (var i = 0; i < data.length; i++) {
+            var value = data[i][key];
+            if (result.indexOf(value) == -1) {
+                result.push(value);
+            }
+        }
+        return result;
+    };
+    
+    console.log('hit 3');
+    
+    
+    var vm = this,
+        items = [];
+
+    for (var i = 1; i <= 1000; i++) {
+        var itemDate = moment().add(i, 'days');
+
+        var item = {
+            description: 'Description for item ' + i,
+            date: itemDate.toDate()
+        };
+        items.push(item);
+    }
+
+    vm.items = items;
+    return vm;
+    
+    
+    
+    
+}]);
+// end myApp.controller('filterController', function MyController($scope) {
+
+
+
 jobControllers.controller('ListController', ['$scope', '$http', 'Data', '$uibModal', '$log', '$filter', function ($scope, $http, Data, $uibModal, $log, $filter) {
 
 	$scope.jobsArray = Data;

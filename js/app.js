@@ -2,7 +2,10 @@ var myApp = angular.module('myApp', [
 
 	'ngRoute',
 	'jobControllers',
-	'jobFilters'
+	'jobFilters1',
+	'jobFilters2',
+	'jobFilters3',
+	'jobFilters4'
 
 ]);
 
@@ -61,6 +64,10 @@ myApp.config(['$routeProvider', function($routeProvider){
 	// 	templateUrl: 'partials/addjob.html',
 	// 	controller: 'AddJobController'
 	// }).
+    when('/filter', {
+		templateUrl: 'partials/filter.html',
+		controller: 'FilterController'
+	}).
 	when('/info', {
 		templateUrl: 'partials/info.html',
 		controller: 'InfoController'

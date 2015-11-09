@@ -1,0 +1,41 @@
+<section class="jobslistpage row">
+  <!-- SEARCH DIRECTORY -->
+  <!-- <div class="search">
+    <h1>Job Directory</h1>
+    <label>Search: </label>
+    <input ng-model="query" placeholder="Search for jobs" autofocus>
+
+    <label class="formgroup">by:
+      <select ng-model="jobsOrder">
+        <option value="date">Date</option>
+        <option value="client">Client</option>
+        <option value="number">Number</option>
+        <option value="active">Active</option>
+      </select>
+    </label>
+
+  </div> -->
+
+        <!--
+other filters:  | orderBy:'client', 
+-->
+
+<div ng-repeat="team in players">
+    <b>{{team.team}}</b>
+    <li ng-repeat="player in players | filter: {team: team}">{{player.name}}</li>        
+</div>
+</div>
+
+
+
+<div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray | startsWithA">
+
+  <div class="col-md-2 span-client">{{job.client}}</div>
+
+</div>
+
+
+
+<!-- <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></uib-pagination> -->
+
+</section>
