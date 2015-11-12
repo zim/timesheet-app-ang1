@@ -9,6 +9,8 @@ var myApp = angular.module('myApp', [
 
 ]);
 
+
+
 myApp.factory('Data', function () {
   //return { message: "I'm data from a service" };
   // CHECK TO SEE IF LOCAL IS AVAILABLE

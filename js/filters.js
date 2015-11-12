@@ -31,7 +31,7 @@ angular.module('jobFilters3', []).filter('startsWithA', function () {
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
         
-      console.log(item.date);
+      //console.log(item.date);
         
       if (/t/i.test(item.client.substring(0, 1))) {
           

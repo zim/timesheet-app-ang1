@@ -28,27 +28,92 @@ jobControllers.controller('FilterController', ['$scope', '$http', 'Data', '$uibM
         return result;
     };
     
-    console.log('hit 3');
+    console.log('hit 3 = ' + $scope.jobsArray.length);
     
     
-    var vm = this,
-        items = [];
-
-    for (var i = 1; i <= 1000; i++) {
-        var itemDate = moment().add(i, 'days');
-
-        var item = {
-            description: 'Description for item ' + i,
-            date: itemDate.toDate()
-        };
-        items.push(item);
+    var arrayDate = [];
+    var arrayDay = [];
+    var arrayMonth = [];
+    var arrayYear = [];
+    var i;
+    
+    for(i=0;i<$scope.jobsArray.length;i++){
+        console.log($scope.jobsArray[i].date);
+        arrayDate[i]=$scope.jobsArray[i].date;
+        
+        var str = $scope.jobsArray[i].date;
+        
+        var res = str.split("/");
+        
+        arrayMonth[i]=res[0];
+        arrayDay[i]=res[1];
+        arrayYear[i]=res[2];
+        
+        console.log(arrayMonth[i]);
+        console.log(arrayDay[i]);
+        console.log(arrayYear[i]);
+        
     }
-
-    vm.items = items;
-    return vm;
+    
+    var unique = arrayDate.filter(function(item, i, ar){
+//        console.log(i);
+        return ar.indexOf(item) === i;
+    });
+    console.log(unique);
+    
+    var uniqueYear = arrayYear.filter(function(item, i, ar){
+        console.log(item);
+        console.log(ar.indexOf(item));
+        return ar.indexOf(item) === i;
+    });
+    console.log(uniqueYear);
+    
+    var uniqueMonth = arrayMonth.filter(function(item, i, ar){
+        console.log(item);
+        console.log(ar.indexOf(item));
+        return ar.indexOf(item) === i;
+    });
+    console.log(uniqueMonth);
+    
+    var uniqueDay = arrayDay.filter(function(item, i, ar){
+        console.log(item);
+        console.log(ar.indexOf(item));
+        return ar.indexOf(item) === i;
+    });
+    console.log(uniqueDay);
     
     
-    
+    $scope.selectedMonthFilter = function(element) {
+        
+        if(!$scope.selectedYear){
+            console.log('!$scope.selectedYear = ' + !$scope.selectedYear);
+            return true;
+        }
+        if(!$scope.selectedMonth){
+            console.log('!$scope.selectedMonth = ' + !$scope.selectedMonth);
+            return true;
+        }
+        if(!$scope.selectedDay){
+            console.log('!$scope.selectedDay = ' + !$scope.selectedDay);
+            return true;
+        } 
+        
+        
+        
+        
+        //if(!$scope.selectedMonth) return true;
+        
+        var str = element.date;
+        
+        var res = str.split("/");
+        
+        var tempMonth=res[0];
+        var tempDay=res[1];
+        var tempYear=res[2];
+        
+        return ((tempYear == $scope.selectedYear)&&(tempMonth == $scope.selectedMonth)&&(tempDay == $scope.selectedDay));
+        //return tempYear == $scope.selectedYear;
+      }
     
 }]);
 // end myApp.controller('filterController', function MyController($scope) {
