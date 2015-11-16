@@ -1,30 +1,4 @@
 <section class="jobslistpage row">
-  <!-- SEARCH DIRECTORY -->
-  <!-- <div class="search">
-    <h1>Job Directory</h1>
-    <label>Search: </label>
-    <input ng-model="query" placeholder="Search for jobs" autofocus>
-
-    <label class="formgroup">by:
-      <select ng-model="jobsOrder">
-        <option value="date">Date</option>
-        <option value="client">Client</option>
-        <option value="number">Number</option>
-        <option value="active">Active</option>
-      </select>
-    </label>
-
-  </div> -->
-
-        <!--
-other filters:  | orderBy:'client', 
--->
-
-<div ng-repeat="team in players">
-    <b>{{team.team}}</b>
-    <li ng-repeat="player in players | filter: {team: team}">{{player.name}}</li>        
-</div>
-
 
 Show results for 
    <select ng-model = "selectedYear">
@@ -51,30 +25,81 @@ Show results for
     
     <select ng-model = "selectedDay">
       <option></option>
-      <option value="01">1</option>  
-      <option value="02">2</option>  
-      <option value="03">3</option>  
-      <option value="04">4</option>  
-      <option value="05">5</option>  
-      <option value="06">6</option>  
-      <option value="07">7</option>  
-      <option value="08">8</option>  
-      <option value="09">9</option>  
+      <option value="1">1</option>  
+      <option value="2">2</option>  
+      <option value="3">3</option>  
+      <option value="4">4</option>  
+      <option value="5">5</option>  
+      <option value="6">6</option>  
+      <option value="7">7</option>  
+      <option value="8">8</option>  
+      <option value="9">9</option>  
       <option value="10">10</option>  
       <option value="11">11</option>  
-      <option value="12">12</option>  
+      <option value="12">12</option>
+      
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+      <option value="24">24</option>
+      <option value="25">25</option>
+      <option value="26">26</option>
+      <option value="27">27</option>
+      <option value="28">28</option>
+      <option value="29">29</option>
+      <option value="30">30</option>
+      <option value="31">31</option>
     </select>
     
+    
+    <input type="date" uib-datepicker-popup="{{format}}" ng-model="selectedDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+    
+    <div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray | filter: selectedMonthFilter">
+    
+        <div class="col-md-2 span-client">{{jobsArray.indexOf(job)}}{{job.date | dateFormat1}}<span class="span-start-time"><span>Start Time:</span> {{job.jobstart}}</span><span class="span-finish-time"><span>Finish Time:</span> {{job.jobfinish}}</span><span class="span-duration"><span>Duration:</span> <span></span> {{getJobDuration(job.jobstart,job.jobfinish)}}</span></div>
+
+      <div class="col-md-3 span-client" data-index="{{$index}}" id="{{$index}}_tShowClient">{{job.client | uppercase}}<a href="#/details/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnShowClient" data-index="{{$index}}">[VIEW {{$index}}]</a></div>
+
+      <div class="col-md-3 span-number">{{job.number}}</div>
+
+      <div class="col-md-4-end span-ref">{{job.ref}}
+
+        <div class="iconWrapElement">
+          <button id="{{$index}}_btnSetState" data-index="{{$index}}" class="control-btn {{setStateClass(job.active)}}" ng-click="setState()"></button>
+          <!-- <button id="{{$index}}_btnEditItem" data-index="{{$index}}" data-toggle="modal" data-target="#modal{{$index}}" class="control-btn btn-edit"></button>
+
+          <a href="#/edit/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnEditItem" data-index="{{$index}}" class="control-btn btn-edit">Edit</a> -->
+
+          <button type="button" class="control-btn btn-edit" data-index="{{$index}}" ng-click="openEdit(jobsArray.indexOf(job))"></button>
+
+          <button id="{{$index}}_btnDeleteItem" data-index-number="{{$index}}" class="control-btn btn-delete" ng-click="delete(jobsArray.indexOf(job))"></button>
+        </div>
+      </div>
+    
+    </div>
+    
+<!--
     <ul>
       <li ng-repeat="job in jobsArray | filter: selectedMonthFilter" style="color:white;">client: {{job.client}}, date: {{job.date}}, number: {{job.number}}</li>
     </ul>
+-->
 
 
+<!--
 <div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray | startsWithA">
 
   <div class="col-md-2 span-client">{{job.client}}</div>
 
 </div>
+-->
 
 
 

@@ -4,32 +4,7 @@ jobControllers.controller('FilterController', ['$scope', '$http', 'Data', '$uibM
     
     $scope.jobsArray = Data;
     
-    console.log('hit 1');
-    
-    
-    $scope.players = [
-      {name: 'Gene', team: 'alpha'},
-      {name: 'George', team: 'beta'},
-      {name: 'Steve', team: 'gamma'},
-      {name: 'Paula', team: 'beta'},
-      {name: 'Scruath', team: 'gamma'}
-    ];
-    
-    console.log('hit 2');
-    
-    var uniqueItems = function (data, key) {
-        var result = [];
-        for (var i = 0; i < data.length; i++) {
-            var value = data[i][key];
-            if (result.indexOf(value) == -1) {
-                result.push(value);
-            }
-        }
-        return result;
-    };
-    
-    console.log('hit 3 = ' + $scope.jobsArray.length);
-    
+    console.log('hit 1 = ' + $scope.jobsArray.length);
     
     var arrayDate = [];
     var arrayDay = [];
@@ -38,7 +13,7 @@ jobControllers.controller('FilterController', ['$scope', '$http', 'Data', '$uibM
     var i;
     
     for(i=0;i<$scope.jobsArray.length;i++){
-        console.log($scope.jobsArray[i].date);
+        //console.log($scope.jobsArray[i].date);
         arrayDate[i]=$scope.jobsArray[i].date;
         
         var str = $scope.jobsArray[i].date;
@@ -49,9 +24,9 @@ jobControllers.controller('FilterController', ['$scope', '$http', 'Data', '$uibM
         arrayDay[i]=res[1];
         arrayYear[i]=res[2];
         
-        console.log(arrayMonth[i]);
-        console.log(arrayDay[i]);
-        console.log(arrayYear[i]);
+//        console.log(arrayMonth[i]);
+//        console.log(arrayDay[i]);
+//        console.log(arrayYear[i]);
         
     }
     
@@ -85,35 +60,149 @@ jobControllers.controller('FilterController', ['$scope', '$http', 'Data', '$uibM
     
     $scope.selectedMonthFilter = function(element) {
         
-        if(!$scope.selectedYear){
-            console.log('!$scope.selectedYear = ' + !$scope.selectedYear);
-            return true;
-        }
-        if(!$scope.selectedMonth){
-            console.log('!$scope.selectedMonth = ' + !$scope.selectedMonth);
-            return true;
-        }
-        if(!$scope.selectedDay){
-            console.log('!$scope.selectedDay = ' + !$scope.selectedDay);
-            return true;
-        } 
-        
-        
-        
-        
-        //if(!$scope.selectedMonth) return true;
-        
         var str = element.date;
         
         var res = str.split("/");
-        
+
         var tempMonth=res[0];
         var tempDay=res[1];
         var tempYear=res[2];
         
-        return ((tempYear == $scope.selectedYear)&&(tempMonth == $scope.selectedMonth)&&(tempDay == $scope.selectedDay));
-        //return tempYear == $scope.selectedYear;
-      }
+        console.log(element);
+        
+        console.log(!$scope.selectedDate);
+        
+        console.log($scope.selectedDate);
+        
+        if($scope.selectedDate){
+            
+            
+            
+            
+            
+            
+            console.log($scope.selectedDate.getYear());
+            console.log($scope.selectedDate.getMonth());
+            console.log($scope.selectedDate.getDay());
+            
+            var testYear = $scope.selectedDate.getYear();
+            var testMonth = parseInt($scope.selectedDate.getMonth());
+            console.log('testMonth = ' + testMonth);
+            testMonth = testMonth+1;
+            console.log('testMonth+1 = ' + testMonth);
+            var testDay = $scope.selectedDate.getDate();
+            //var testDay = $scope.selectedDate.getDay();
+            
+            switch (testYear) {
+            case 114:
+                testYear = '2014';
+                break;
+            case 115:
+                testYear = '2015';
+                break;
+            case 116:
+                testYear = '2016';
+                break;
+            }
+            
+            console.log('testYear = ' + testYear);
+            console.log('testMonth = ' + testMonth);
+            console.log('testDay = ' + testDay);
+            
+            return ((tempYear == testYear)&&(tempMonth == testMonth)&&(tempDay == testDay));
+            
+        }
+        
+        if(!$scope.selectedDate){
+            
+            console.log("if(!$scope.selectedDate){ ===============");
+            
+            $scope.selectedDate = null;
+            
+            if(!$scope.selectedYear){
+                console.log('!$scope.selectedYear = ' + !$scope.selectedYear);
+                return true;
+            }
+
+            if(!$scope.selectedMonth){
+
+                return tempYear == $scope.selectedYear;
+
+                console.log('!$scope.selectedMonth = ' + !$scope.selectedMonth);
+                return true;
+            }
+
+            if(!$scope.selectedDay){
+
+                return ((tempYear == $scope.selectedYear)&&(tempMonth == $scope.selectedMonth));
+
+                console.log('!$scope.selectedDay = ' + !$scope.selectedDay);
+                return true;
+            } 
+
+            return ((tempYear == $scope.selectedYear)&&(tempMonth == $scope.selectedMonth)&&(tempDay == $scope.selectedDay));
+            
+        }// END if(!$scope.selectedDate){
+        
+      }// END $scope.selectedMonthFilter = function(element) {
+    
+    
+    // EDIT ITEM
+    $scope.openEdit = function(jobId) {
+
+    	console.log('jobId = ' + jobId);
+
+    	$scope.jobId = jobId;
+
+	      $scope.modalInstance = $uibModal.open({
+	      	templateUrl: 'partials/edit.html',
+			controller: 'EditItemController',
+	        scope: $scope
+	      });
+
+	      $scope.modalInstance.result.then(function () {
+				//$scope.selected = selectedItem;
+			}, function () {
+				$log.info('Modal edit item dismissed at: ' + new Date());
+			});
+	};// END $scope.openEdit = function(jobId) {
+
+    $scope.toggleAnimation = function () {
+		$scope.animationsEnabled = !$scope.animationsEnabled;
+	};
+    
+    $scope.delete = function(index) {
+
+		console.log('index = ' + index);
+
+		console.log($scope.jobsArray);
+
+		$scope.jobsArray.splice(index, 1);
+
+		console.log($scope.jobsArray);
+
+		localStorage.setItem('jobsObject', angular.toJson($scope.jobsArray));
+
+		// var found = $filter('filter')($scope.jobsArray, {$$hashKey: this.job.$$hashKey}, true);
+		
+		// if (found.length) {
+		// 	$scope.selected = JSON.stringify(found[0]);
+
+	 //         //fruits.splice(2, 1, "Lemon", "Kiwi");
+
+	 //         console.log($scope.selected);
+	 //     } else {
+	 //     	$scope.selected = 'Not found';
+	 //     	console.log($scope.selected);
+	 //     }
+
+		//console.log(this.dataset.indexNumber);
+
+		//$scope.whichItem = 
+
+	    //$scope.msg = 'clicked';
+
+	}// end DELETE
     
 }]);
 // end myApp.controller('filterController', function MyController($scope) {
