@@ -66,6 +66,10 @@ myApp.config(['$routeProvider', function($routeProvider){
 	// 	templateUrl: 'partials/addjob.html',
 	// 	controller: 'AddJobController'
 	// }).
+    when('/report', {
+		templateUrl: 'partials/report.html',
+		controller: 'ReportController'
+	}).
     when('/filter', {
 		templateUrl: 'partials/filter.html',
 		controller: 'FilterController'

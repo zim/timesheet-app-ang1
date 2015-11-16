@@ -60,7 +60,11 @@ Show results for
     </select>
     
     
-    <input type="date" uib-datepicker-popup="{{format}}" ng-model="selectedDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+    <input type="date" uib-datepicker-popup="{{format}}" ng-model="selectedDate" is-open="status.opened" min-date="minDate" max-date="maxDate" min-mode="week" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+    
+    Week Period
+    <input ng-model="formData.dueDate" type="button" id="dueDate" name="dueDate" class="form-control" datepicker-options="dateOptions" datepicker-popup="MM-dd-yyyy" datepicker-append-to-body="true" is-open="data.isOpen" min-mode="week" datepicker-mode="day"	show-button-bar="false" ng-click="data.isOpen = true"/>
+    
     
     <div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray | filter: selectedMonthFilter">
     

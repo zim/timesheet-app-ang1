@@ -1,0 +1,35 @@
+<section class="jobslistpage row">
+
+
+    
+    Week Period
+    <input type="date" uib-datepicker-popup="{{format}}" ng-model="formData.dueDate" id="dueDate" name="dueDate" class="form-control" datepicker-options="dateOptions" datepicker-append-to-body="true" is-open="data.isOpen" min-mode="week" datepicker-mode="day"	show-button-bar="false" ng-click="data.isOpen = true"/>
+    
+    
+    <div id="job_wrap{{$index}}" class="layout job_wrap job-inactive" ng-repeat="job in jobsArray">
+    
+        <div class="col-md-2 span-client">{{jobsArray.indexOf(job)}}{{job.date | dateFormat1}}<span class="span-start-time"><span>Start Time:</span> {{job.jobstart}}</span><span class="span-finish-time"><span>Finish Time:</span> {{job.jobfinish}}</span><span class="span-duration"><span>Duration:</span> <span></span> {{getJobDuration(job.jobstart,job.jobfinish)}}</span></div>
+
+      <div class="col-md-3 span-client" data-index="{{$index}}" id="{{$index}}_tShowClient">{{job.client | uppercase}}<a href="#/details/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnShowClient" data-index="{{$index}}">[VIEW {{$index}}]</a></div>
+
+      <div class="col-md-3 span-number">{{job.number}}</div>
+
+      <div class="col-md-4-end span-ref">{{job.ref}}
+
+        <div class="iconWrapElement">
+          <button id="{{$index}}_btnSetState" data-index="{{$index}}" class="control-btn {{setStateClass(job.active)}}" ng-click="setState()"></button>
+          <!-- <button id="{{$index}}_btnEditItem" data-index="{{$index}}" data-toggle="modal" data-target="#modal{{$index}}" class="control-btn btn-edit"></button>
+
+          <a href="#/edit/{{jobsArray.indexOf(job)}}" id="{{$index}}_btnEditItem" data-index="{{$index}}" class="control-btn btn-edit">Edit</a> -->
+
+          <button type="button" class="control-btn btn-edit" data-index="{{$index}}" ng-click="openEdit(jobsArray.indexOf(job))"></button>
+
+          <button id="{{$index}}_btnDeleteItem" data-index-number="{{$index}}" class="control-btn btn-delete" ng-click="delete(jobsArray.indexOf(job))"></button>
+        </div>
+      </div>
+    
+    </div>
+    
+
+
+</section>
